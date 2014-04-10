@@ -1,0 +1,12 @@
+[Unit]
+Description=ssh agent
+
+[Service]
+Type=forking
+#use a static socket name so that if it restarts the old
+#SSH_AUTH_SOCK will still be valid
+ExecStart=/usr/bin/sh -c '/usr/bin/ssh-agent -a %t/ssh-agent-socket > %t/ssh-agent-env'
+ExecStartPost=/usr/bin/sed -i -e 's/; export.*$//' -e 's/^echo .*$//' %t/ssh-agent-env
+GuessMainPID=yes
+Restart=always
+RestartSec=10

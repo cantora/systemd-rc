@@ -1,0 +1,21 @@
+[Unit]
+Description=tmux session
+#After=gpg-agent.service
+#Wants=gpg-agent.service
+After=ssh-agent.service
+Wants=ssh-agent.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/tmux new-session -s alpha -d
+ExecStop=/usr/bin/tmux kill-server
+Restart=always
+RestartSec=1
+ExecStartPost=/usr/bin/tmux set-option -g update-environment \
+                            "SSH_ASKPASS SSH_CONNECTION WINDOWID XAUTHORITY"
+                            #remove: DISPLAY SSH_AUTH_SOCK SSH_AGENT_PID
+Environment=DISPLAY=:0
+EnvironmentFile=%t/ssh-agent-env
+
+[Install]
+WantedBy=main.target
