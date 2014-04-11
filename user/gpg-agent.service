@@ -1,0 +1,11 @@
+[Unit]
+Description=gpg agent
+
+[Service]
+Type=forking
+ExecStartPre=/usr/bin/rm -f %t/gpg-agent-env
+ExecStart=/usr/bin/gpg-agent --daemon \
+                             --write-env-file %t/gpg-agent-env
+GuessMainPID=yes
+Restart=always
+RestartSec=10

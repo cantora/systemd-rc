@@ -3,6 +3,7 @@ Description=ssh agent
 
 [Service]
 Type=forking
+ExecStartPre=/usr/bin/rm -f %t/ssh-agent-env
 #use a static socket name so that if it restarts the old
 #SSH_AUTH_SOCK will still be valid
 ExecStart=/usr/bin/sh -c '/usr/bin/ssh-agent -a %t/ssh-agent-socket > %t/ssh-agent-env'
