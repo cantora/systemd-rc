@@ -1,0 +1,11 @@
+[Unit]
+Description=monopaste daemon
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/sh -c 'exec /home/%u/bin/monopasted'
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=main.target

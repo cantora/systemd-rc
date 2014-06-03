@@ -3,9 +3,11 @@ MK_SYSTEMD_DIR         = $(shell mkdir -p $(SYSTEMD_CONFIG_DIR))
 
 .PHONY: install
 install:
+	mkdir -p $(SYSTEMD_CONFIG_DIR)
 	cd $(SYSTEMD_CONFIG_DIR) && { [ -e user ] || ln -s $(CURDIR)/user; }
 	systemctl --user enable main.target
 	systemctl --user enable tmux
+	systemctl --user enable monopasted
 
 .PHONY: clean
 clean:
