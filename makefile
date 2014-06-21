@@ -8,6 +8,7 @@ install:
 	systemctl --user enable main.target
 	systemctl --user enable tmux
 	systemctl --user enable monopasted
+	systemctl --user enable emacs
 
 .PHONY: clean
 clean:
