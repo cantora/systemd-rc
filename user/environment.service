@@ -1,0 +1,7 @@
+[Unit]
+Description=setup environment file
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/rm -f %t/environment
+ExecStart=/usr/bin/sh /home/%u/.environment %t/environment
