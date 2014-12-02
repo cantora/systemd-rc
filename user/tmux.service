@@ -1,7 +1,5 @@
 [Unit]
 Description=tmux session
-After=gpg-agent.service
-Wants=gpg-agent.service
 After=ssh-agent.service
 Wants=ssh-agent.service
 
@@ -16,7 +14,6 @@ ExecStartPost=/usr/bin/tmux set-option -g update-environment \
                             #remove: DISPLAY SSH_AUTH_SOCK SSH_AGENT_PID
 Environment=DISPLAY=:0
 EnvironmentFile=%t/ssh-agent-env
-EnvironmentFile=%t/gpg-agent-env
 
 [Install]
 WantedBy=main.target
